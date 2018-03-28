@@ -1,0 +1,43 @@
+service: scala-serverless-survey
+
+provider:
+  name: aws
+  runtime: java8
+  region: us-east-1
+  stage: dev
+
+package:
+  artifact: target/scala-2.12/test.jar
+
+functions:
+  LifeWay-AWS-Scala-Lambda-Handler-1:
+    handler: example.HandlerWithBody::handler
+    events:
+      - http:
+          path: LifeWay_aws_scala_lambda_handler
+          method: post
+          cors: true
+
+  LifeWay-AWS-Scala-Lambda-Handler-2:
+    handler: example.HandlerNoBody::handler
+    events:
+      - http:
+          path: LifeWay_aws_scala_lambda_handler
+          method: get
+          cors: true
+
+  mkotsur-aws-lambda-scala:
+    handler: example.PingPongHandler::handle
+    events:
+      - http:
+          path: mkotsur_aws_lambda_scala
+          method: post
+          cors: true
+
+  aws-lambda-functions-in-scala:
+    handler: example.Main::greeting
+    events:
+      - http:
+          path: aws-lambda-functions-in-scala
+          method: post
+          cors: true
